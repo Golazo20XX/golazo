@@ -67,11 +67,11 @@
   <header><img src="logo-horizontal.png" alt="Golazo"></header>
   <iframe id="app" src="https://script.google.com/macros/s/AKfycbw4uERq88tZs3ZzYNcieNAKwR1BChyYuMte_paaod9Aox51OOpB_Qg4l5UVrRyEcOaA/exec"></iframe>
 <script>
-  const s=document.getElementById('splash');let cargo=false,tiempo=false;
-  const cerrar=()=>{if(cargo&&tiempo)s.classList.add('oculto')};
-  setTimeout(()=>{tiempo=true;cerrar()},1800);
-  document.getElementById('app').addEventListener('load',()=>{cargo=true;cerrar()});
-  setTimeout(()=>s.classList.add('oculto'),8000);
+  const s=document.getElementById('splash');let listo=false,tiempo=false;
+  const cerrar=()=>{if(listo&&tiempo)s.classList.add('oculto')};
+  setTimeout(()=>{tiempo=true;cerrar()},1500);
+  window.addEventListener('message',ev=>{if(ev.data&&ev.data.golazo==='listo'){listo=true;cerrar();}});
+  setTimeout(()=>s.classList.add('oculto'),15000);
 </script>
 </body>
 </html>
