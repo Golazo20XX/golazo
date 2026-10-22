@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Golazo</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Golazo">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#071126">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  html,body{margin:0;height:100%;background:#071126;overflow:hidden}
+  #splash{position:fixed;inset:0;z-index:10;background:#071126 url(splash.png) center/cover no-repeat;transition:opacity .6s}
+  #splash.oculto{opacity:0;pointer-events:none}
+  header{position:fixed;top:0;left:0;right:0;height:64px;padding-top:env(safe-area-inset-top);
+         background:#071126;display:flex;align-items:center;justify-content:center}
+  header img{height:44px}
+  iframe{position:fixed;left:0;bottom:0;width:100%;border:0;background:#071126;
+         top:calc(64px + env(safe-area-inset-top));height:calc(100% - 64px - env(safe-area-inset-top))}
+</style>
+</head>
+<body>
+  <div id="splash"></div>
+  <header><img src="logo-horizontal.png" alt="Golazo"></header>
+  <iframe id="app" src="https://script.google.com/macros/s/AKfycbw4uERq88tZs3ZzYNcieNAKwR1BChyYuMte_paaod9Aox51OOpB_Qg4l5UVrRyEcOaA/exec"></iframe>
+<script>
+  const s=document.getElementById('splash');let cargo=false,tiempo=false;
+  const cerrar=()=>{if(cargo&&tiempo)s.classList.add('oculto')};
+  setTimeout(()=>{tiempo=true;cerrar()},1800);
+  document.getElementById('app').addEventListener('load',()=>{cargo=true;cerrar()});
+  setTimeout(()=>s.classList.add('oculto'),8000);
+</script>
+</body>
+</html>
