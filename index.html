@@ -38,6 +38,19 @@
   iframe{position:fixed;left:0;bottom:0;width:100%;border:0;background:#071126;
          top:calc(64px + env(safe-area-inset-top));height:calc(100% - 64px - env(safe-area-inset-top))}
 </style>
+<script>
+  /* Guarda la sesión del jugador en esta página para que no pida la clave cada vez */
+  window.addEventListener('message',function(ev){
+    var d=ev.data;
+    if(!d||!d.golazo)return;
+    if(!/\.googleusercontent\.com$/.test(new URL(ev.origin).hostname))return;
+    try{
+      if(d.golazo==='set')localStorage.setItem('golazo_u',JSON.stringify(d.v));
+      else if(d.golazo==='del')localStorage.removeItem('golazo_u');
+      else if(d.golazo==='get')ev.source.postMessage({golazo:'sesion',v:JSON.parse(localStorage.getItem('golazo_u')||'null')},'*');
+    }catch(e){}
+  });
+</script>
 </head>
 <body>
   <div id="splash">
